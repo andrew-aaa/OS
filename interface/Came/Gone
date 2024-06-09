@@ -1,0 +1,65 @@
+import sys
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QPushButton, QMainWindow
+
+
+class HoverButton_1(QPushButton):
+    def __init__(self, parent=None):
+        super(HoverButton_1, self).__init__(parent)
+
+    def enterEvent(self, event):
+        Window.Button_1.setText('Came')
+        Window.Button_2.setText('Gone')
+
+    def leaveEvent(self, event):
+        Window.Button_1.setText('')
+        Window.Button_2.setText('')
+
+
+class HoverButton_2(QPushButton):
+    def __init__(self, parent=None):
+        super(HoverButton_2, self).__init__(parent)
+
+    def enterEvent(self, event):
+        Window.Button_2.setText('Came')
+        Window.Button_1.setText('Gone')
+
+    def leaveEvent(self, event):
+        Window.Button_1.setText('')
+        Window.Button_2.setText('')
+
+
+class Ui_Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setObjectName("Window")
+        self.resize(400, 300)
+        self.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
+
+        self.Button_1 = HoverButton_1(self)
+        self.Button_1.setGeometry(QtCore.QRect(30, 110, 130, 50))
+        self.Button_1.setStyleSheet("background-color: rgb(85, 255, 127);")
+        self.Button_1.setText("")
+
+        self.Button_2 = HoverButton_2(self)
+        self.Button_2.setGeometry(QtCore.QRect(250, 110, 130, 50))
+        self.Button_2.setStyleSheet("background-color: rgb(85, 255, 127);")
+        self.Button_2.setText("")
+
+        self.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(self)
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self, Window):
+        _translate = QtCore.QCoreApplication.translate
+        Window.setWindowTitle(_translate("Window", "Came/Gone"))
+
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    Window = Ui_Window()
+    Window.show()
+    sys.exit(app.exec_())
