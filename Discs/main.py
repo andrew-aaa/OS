@@ -1,7 +1,7 @@
 import win32api
 import psutil
 from threading import Timer
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 
 class Ui_MainWindow(object):
