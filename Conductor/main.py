@@ -3,8 +3,7 @@ import os
 import shutil
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QWidget, QGridLayout, QApplication
-from PyQt5.Qt import (QSplitter, QTreeView, QTextEdit, QInputDialog, QFileDialog,
-                      QFileSystemModel, QVBoxLayout, QDir, QLineEdit)
+from PyQt5.Qt import QTreeView, QInputDialog, QFileDialog, QFileSystemModel
 
 
 class MainWindow(QWidget):
