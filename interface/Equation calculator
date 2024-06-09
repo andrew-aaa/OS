@@ -1,0 +1,66 @@
+import sys
+from PyQt5 import QtCore, QtWidgets
+
+
+class Ui_Window(object):
+    def setupUi(self, Window):
+        Window.setObjectName("Window")
+        Window.resize(400, 200)
+        self.centralwidget = QtWidgets.QWidget(Window)
+        self.centralwidget.setObjectName("centralwidget")
+
+        self.Button = QtWidgets.QPushButton(self.centralwidget)
+        self.Button.setGeometry(QtCore.QRect(10, 80, 100, 50))
+        self.Button.setObjectName("Button")
+
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(140, 90, 240, 30))
+        self.label.setObjectName("label")
+
+        self.label_exit = QtWidgets.QLabel(self.centralwidget)
+        self.label_exit.setGeometry(QtCore.QRect(200, 140, 160, 40))
+        self.label_exit.setText("")
+        self.label_exit.setObjectName("label_exit")
+
+        self.line_input = QtWidgets.QLineEdit(self.centralwidget)
+        self.line_input.setGeometry(QtCore.QRect(150, 10, 50, 30))
+        self.line_input.setObjectName("line_input")
+
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(10, 10, 170, 30))
+        self.label_2.setObjectName("label_2")
+
+        Window.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(Window)
+        QtCore.QMetaObject.connectSlotsByName(Window)
+
+    def retranslateUi(self, Window):
+        _translate = QtCore.QCoreApplication.translate
+        Window.setWindowTitle(_translate("Window", "Equation calculator"))
+        self.Button.setText(_translate("Window", "Calculate"))
+        self.label.setText(_translate("Window", "<html><head/><body><p><span style=\" font-size:16pt;\">Результат y = x</span><span style=\" font-size:16pt; vertical-align:super;\">2</span><span style=\" font-size:16pt;\"> - 3 + x</span></p></body></html>"))
+        self.label_2.setText(_translate("Window", "Enter value X:"))
+
+
+class Window(QtWidgets.QMainWindow, Ui_Window):
+    def __init__(self):
+        super(Window, self).__init__()
+        self.setupUi(self)
+        self.Button.clicked.connect(lambda: self.text())
+
+    def text(self):
+        x = self.line_input.text()
+        try:
+            x = int(x)
+            result = x ** 2 - 3 + x
+            self.label_exit.setText(str(result))
+        except ValueError:
+            self.label_exit.setText("Введено не число")
+
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    application = Window()
+    application.show()
+    sys.exit(app.exec_())
